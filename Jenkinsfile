@@ -1,6 +1,5 @@
 pipeline {
     agent any
-
     parameters {
          string(name: 'tomcat_devops', defaultValue: '10.5.30.150', description: 'devops tomcat server')
     }
