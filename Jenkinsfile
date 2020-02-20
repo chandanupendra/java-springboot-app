@@ -18,7 +18,7 @@ pipeline {
         }
         stage('restart tomcat service @webserver-1a') {
             steps {
-                bash '''#!/bin/bash
+                sh '''#!/bin/bash
                 stoptomcat = 'sudo systemctl stop tomcat'
                 starttomcat = 'sudo systemctl start tomcat'
                 $stoptomcat
