@@ -16,5 +16,16 @@ pipeline {
                 sh "sudo scp -i /var/lib/jenkins/secrets/envstage/heroiot-envstage-devops.pem /var/lib/jenkins/workspace/java-springboot-app/target/*.war centos@${params.tomcat_devops}:/opt/tomcat/webapps"
             }
         }
+        stage('restart tomcat service @webserver-1a') {
+            steps {
+                bash '''#!/bin/bash
+                stoptomcat = 'sudo systemctl stop tomcat'
+                starttomcat = 'sudo systemctl start tomcat'
+                $stoptomcat
+                sleep 10
+                $starttomcat
+                '''
+            }
+        }
     }
 }
