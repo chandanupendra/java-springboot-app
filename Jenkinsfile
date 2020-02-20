@@ -18,7 +18,7 @@ pipeline {
         }
     stage('restart tomcat service @webserver-1a') {
         steps {
-            sshAgent(['sshagent_envstage_devops']) {
+            sshUserPrivateKey(['sshagent_envstage_devops']) {
                 sh 'pwd'
                 sh 'hostnamectl'
                 sh 'sudo systemctl stop tomcat'
