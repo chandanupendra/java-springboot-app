@@ -13,14 +13,14 @@ pipeline {
 
         stage('Deployments') {
             steps {
-                sshagent(['sshagent_envstage_devops']) {
+                sshAgent(['sshagent_envstage_devops']) {
                     sh 'scp /var/lib/jenkins/workspace/java-springboot-app/target/*.war centos@${params.tomcat_devops}:/opt/tomcat/webapps'
                 }
             }
         }
         stage('restart tomcat service @webserver-1a') {
             steps {
-                sshagent(['sshagent_envstage_devops']) {
+                sshAgent(['sshagent_envstage_devops']) {
                     sh 'pwd'
                     sh 'hostnamectl'
                     sh 'sudo systemctl stop tomcat'
