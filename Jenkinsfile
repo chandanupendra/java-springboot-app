@@ -16,7 +16,6 @@ pipeline {
                 sh "sudo scp -i /var/lib/jenkins/secrets/envstage/heroiot-envstage-devops.pem /var/lib/jenkins/workspace/java-springboot-app/target/*.war centos@${params.tomcat_devops}:/opt/tomcat/webapps"
             }
         }
-    }
     stage('restart tomcat service @webserver-1a') {
         steps {
             sshAgent(['sshagent_envstage_devops']) {
@@ -28,4 +27,5 @@ pipeline {
             }
         }
     }
+}
 }
