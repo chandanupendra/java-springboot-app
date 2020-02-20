@@ -22,7 +22,6 @@ pipeline {
                 sh 'pwd'
                 sh 'hostnamectl'
                 sh 'sudo systemctl stop tomcat'
-                sh 'sleep 10'
                 sh 'sudo systemctl start tomcat'
             }
         }
