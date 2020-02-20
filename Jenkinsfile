@@ -20,7 +20,7 @@ pipeline {
         steps {
             sshagent(credentials: ['sshagent_envstage_devops']) {
                 sh 'pwd'
-                sh 'hostnamectl'
+                sh 'ssh -o StrictHostKeyChecking=no -l centos 10.5.30.150 hostnamectl'
                 sh 'sudo systemctl stop tomcat'
                 sh 'sudo systemctl start tomcat'
             }
