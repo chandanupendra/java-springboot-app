@@ -13,16 +13,20 @@ pipeline {
 
         stage('Deployments') {
             steps {
-                sh "sudo scp -i /var/lib/jenkins/secrets/envstage/heroiot-envstage-devops.pem /var/lib/jenkins/workspace/java-springboot-app/target/*.war centos@${params.tomcat_devops}:/opt/tomcat/webapps"
+                sshagent(['sshagent_envstage_devops']) {
+                    sh 'scp /var/lib/jenkins/workspace/java-springboot-app/target/*.war centos@${params.tomcat_devops}:/opt/tomcat/webapps'
+                }
             }
         }
         stage('restart tomcat service @webserver-1a') {
             steps {
-                sh 'pwd'
-                sh 'hostnamectl'
-                sh 'sudo systemctl stop tomcat'
-                sh 'sleep 10'
-                sh 'sudo systemctl start tomcat'
+                sshagent(['sshagent_envstage_devops']) {
+                    sh 'pwd'
+                    sh 'hostnamectl'
+                    sh 'sudo systemctl stop tomcat'
+                    sh 'sleep 10'
+                    sh 'sudo systemctl start tomcat'
+                }
             }
         }
     }
