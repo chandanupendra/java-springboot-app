@@ -19,13 +19,7 @@ pipeline {
         stage('restart tomcat service @webserver-1a') {
             steps {
                 sshagent(credentials: ['sshagent_envstage_devops']) {
-                    sh 'ssh -o StrictHostKeyChecking=no -l centos 10.5.30.150 <<EOF
-                    pwd
-                    hostnamectl
-                    sudo systemctl stop tomcat
-                    sleep 10
-                    sudo systemctl start tomcat
-                    EOF'
+			sh 'ssh -o StrictHostKeyChecking=no -l centos 10.5.30.150 <<eof uname -a hostnamectl pwd eof'
                 }
             }
         }
