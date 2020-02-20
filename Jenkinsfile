@@ -18,6 +18,7 @@ pipeline {
         }
         stage('restart tomcat service @webserver-1a') {
             steps {
+                sh 'hostnamectl'
                 sh 'sudo systemctl stop tomcat'
                 sh 'sleep 10'
                 sh 'sudo systemctl start tomcat'
